@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丹姐生日快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .birthday-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .birthday-title {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #fd79a8);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+            filter: brightness(1.1) contrast(1.05);
+            text-shadow:
+                0 0 5px rgba(255, 255, 255, 0.2),
+                1px 1px 2px rgba(0, 0, 0, 0.3);
+            animation: bounce 2s infinite, rainbowShift 4s ease-in-out infinite;
+        }
+
+        .birthday-subtitle {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .cake-container {
+            position: relative;
+            display: inline-block;
+            margin: 30px 0;
+        }
+
+        .cake {
+            font-size: 6rem;
+            animation: rotate 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+
+
+        .wishes {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .wishes .line1 {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+            filter: brightness(1.05) contrast(1.02);
+            text-shadow:
+                0 0 3px rgba(255, 255, 255, 0.2),
+                1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: colorShift 3s ease-in-out infinite;
+        }
+
+        .wishes .line2 {
+            background: linear-gradient(45deg, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+            filter: brightness(1.05) contrast(1.02);
+            text-shadow:
+                0 0 3px rgba(255, 255, 255, 0.2),
+                1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: colorShift 3s ease-in-out infinite 0.5s;
+        }
+
+        .wishes .line3 {
+            background: linear-gradient(45deg, #ffeaa7, #fd79a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+            filter: brightness(1.05) contrast(1.02);
+            text-shadow:
+                0 0 3px rgba(255, 255, 255, 0.2),
+                1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: colorShift 3s ease-in-out infinite 1s;
+        }
+
+        .wishes .line4 {
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+            filter: brightness(1.05) contrast(1.02);
+            text-shadow:
+                0 0 3px rgba(255, 255, 255, 0.2),
+                1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: colorShift 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes colorShift {
+
+            0%,
+            100% {
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                filter: hue-rotate(90deg);
+            }
+        }
+
+        @keyframes rainbowShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .balloons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .balloon:nth-child(2) {
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .balloon:nth-child(3) {
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .balloon:nth-child(4) {
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes rotate {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-5deg);
+            }
+
+            75% {
+                transform: rotate(5deg);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* 向上飘的气球动画 */
+        .floating-balloon {
+            position: absolute;
+            font-size: 2.5rem;
+            pointer-events: none;
+            z-index: 100;
+            animation: floatUp 8s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+
+
+        /* 自动烟花效果 */
+        .auto-firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 150;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .birthday-container {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+
+            .birthday-title {
+                font-size: 2.5rem;
+            }
+
+            .birthday-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .wishes {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="balloons">
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+    </div>
+
+    <div class="birthday-container">
+        <h1 class="birthday-title">丹姐生日快乐！</h1>
+        <p class="birthday-subtitle">Happy Birthday!</p>
+        <div class="cake-container">
+            <div class="cake">🎂</div>
+        </div>
+        <div class="wishes">
+            <div class="line1">愿你的每一天都充满阳光与快乐</div>
+            <div class="line2">愿你的梦想都能如愿以偿</div>
+            <div class="line3">祝你身体健康，工作顺利</div>
+            <div class="line4">生日快乐，年年有今日，岁岁有今朝！</div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载完成后的初始化效果
+        window.addEventListener('load', function () {
+            // 延迟1秒后开始各种效果
+            setTimeout(() => {
+                startFloatingBalloons();
+                startAutoFireworks();
+            }, 1000);
+        });
+
+        // 创建向上飘的气球
+        function startFloatingBalloons() {
+            const balloonEmojis = ['🎈', '🎈', '🎈', '🎈', '🎈'];
+
+            function createFloatingBalloon() {
+                const balloon = document.createElement('div');
+                balloon.className = 'floating-balloon';
+                balloon.textContent = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+                balloon.style.left = Math.random() * 100 + '%';
+                balloon.style.animationDuration = (6 + Math.random() * 4) + 's';
+
+                document.body.appendChild(balloon);
+
+                setTimeout(() => {
+                    if (balloon.parentNode) {
+                        balloon.parentNode.removeChild(balloon);
+                    }
+                }, 8000);
+            }
+
+            // 初始创建几个气球
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => createFloatingBalloon(), i * 1000);
+            }
+
+            // 每3秒创建一个新气球
+            setInterval(createFloatingBalloon, 3000);
+        }
+
+
+
+        // 创建自动烟花效果
+        function startAutoFireworks() {
+            function createAutoFirework() {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.7 + window.innerHeight * 0.1;
+
+                createFirework(x, y);
+            }
+
+            // 初始烟花
+            setTimeout(() => createAutoFirework(), 500);
+            setTimeout(() => createAutoFirework(), 1500);
+            setTimeout(() => createAutoFirework(), 2500);
+
+            // 每5秒自动放烟花
+            setInterval(() => {
+                createAutoFirework();
+                setTimeout(() => createAutoFirework(), 1000);
+            }, 5000);
+        }
+
+        // 添加点击效果
+        document.addEventListener('click', function (e) {
+            createFirework(e.clientX, e.clientY);
+        });
+
+        function createFirework(x, y) {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8', '#a29bfe', '#ff9800', '#e91e63'];
+
+            // 创建更多更大的烟花粒子
+            for (let i = 0; i < 12; i++) {
+                const spark = document.createElement('div');
+                spark.style.position = 'absolute';
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                spark.style.width = '8px';
+                spark.style.height = '8px';
+                spark.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                spark.style.borderRadius = '50%';
+                spark.style.pointerEvents = 'none';
+                spark.style.zIndex = '1000';
+
+                // 增强发光效果
+                const glowColor = colors[Math.floor(Math.random() * colors.length)];
+                spark.style.boxShadow = `0 0 15px ${glowColor}, 0 0 25px ${glowColor}`;
+
+                const angle = (i * 30) * Math.PI / 180;
+                const distance = 80 + Math.random() * 120;
+                const endX = x + Math.cos(angle) * distance;
+                const endY = y + Math.sin(angle) * distance;
+
+                // 添加闪烁和更复杂的动画
+                spark.animate([
+                    {
+                        transform: 'translate(0, 0) scale(1.5)',
+                        opacity: 1,
+                        filter: 'brightness(2)'
+                    },
+                    {
+                        transform: `translate(${(endX - x) * 0.3}px, ${(endY - y) * 0.3}px) scale(1.2)`,
+                        opacity: 0.8,
+                        filter: 'brightness(1.5)'
+                    },
+                    {
+                        transform: `translate(${(endX - x) * 0.6}px, ${(endY - y) * 0.6}px) scale(0.8)`,
+                        opacity: 0.6,
+                        filter: 'brightness(1.2)'
+                    },
+                    {
+                        transform: `translate(${endX - x}px, ${endY - y}px) scale(0.2)`,
+                        opacity: 0,
+                        filter: 'brightness(0.5)'
+                    }
+                ], {
+                    duration: 1200 + Math.random() * 800,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+
+                // 添加闪烁效果
+                const twinkleInterval = setInterval(() => {
+                    if (spark.parentNode) {
+                        spark.style.opacity = Math.random() > 0.5 ? '1' : '0.3';
+                    } else {
+                        clearInterval(twinkleInterval);
+                    }
+                }, 100);
+
+                document.body.appendChild(spark);
+
+                setTimeout(() => {
+                    clearInterval(twinkleInterval);
+                    if (spark.parentNode) {
+                        spark.parentNode.removeChild(spark);
+                    }
+                }, 2000);
+            }
+
+            // 添加中心爆炸效果
+            const centerBurst = document.createElement('div');
+            centerBurst.style.position = 'absolute';
+            centerBurst.style.left = x + 'px';
+            centerBurst.style.top = y + 'px';
+            centerBurst.style.width = '20px';
+            centerBurst.style.height = '20px';
+            centerBurst.style.backgroundColor = '#ffffff';
+            centerBurst.style.borderRadius = '50%';
+            centerBurst.style.pointerEvents = 'none';
+            centerBurst.style.zIndex = '999';
+            centerBurst.style.boxShadow = '0 0 30px #ffffff, 0 0 50px #ffeb3b';
+            centerBurst.style.transform = 'translate(-50%, -50%)';
+
+            centerBurst.animate([
+                {
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    opacity: 1
+                },
+                {
+                    transform: 'translate(-50%, -50%) scale(2)',
+                    opacity: 0.8
+                },
+                {
+                    transform: 'translate(-50%, -50%) scale(0.5)',
+                    opacity: 0
+                }
+            ], {
+                duration: 600,
+                easing: 'ease-out'
+            });
+
+            document.body.appendChild(centerBurst);
+
+            setTimeout(() => {
+                if (centerBurst.parentNode) {
+                    centerBurst.parentNode.removeChild(centerBurst);
+                }
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>
